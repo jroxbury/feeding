@@ -1,4 +1,4 @@
-# Breastfeeding app.
+# Breastfeeding tracking app.
 
 This app tracks start time, end time, the diff between the start and end time in minutes and which breast was started on.
 
