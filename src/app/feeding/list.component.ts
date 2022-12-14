@@ -2,12 +2,16 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeedingService } from './feeding.service';
 import { EditButtonService } from './edit-button.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { EditButtonComponent } from './edit-button.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, EditButtonComponent],
   template: `
+    <app-edit-button *ngIf="hasListItems$ | async"></app-edit-button>
     <ng-container *ngIf="feedingData$ | async as data">
       <table>
         <tr>
@@ -48,7 +52,7 @@ import { EditButtonService } from './edit-button.service';
 
       table {
         width: 100%;
-        text-align: center;
+        text-align: left;
         border-spacing: 0 20px;
         font-size: 20px;
       }
@@ -82,6 +86,8 @@ import { EditButtonService } from './edit-button.service';
 export class ListComponent {
   public feedingData$ = this.feedingService.feedingData$;
   public isEditing$ = this.editButtonService.isEditing$;
+  public hasListItems$: Observable<boolean> =
+    this.feedingService.feedingData$.pipe(map((data) => !!data?.list.length));
 
   constructor(
     private readonly feedingService: FeedingService,
