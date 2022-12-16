@@ -1,4 +1,63 @@
+:root {
+  --light: #d9f0ffff;
+  --light-plus: #a3d5ffff;
+  --medium: #83c9f4ff;
+  --medium-plus: #6f73d2ff;
+  --dark: #22256d;
+  --background: #7681b3ff;
+}
+
 body,
 html {
-    height: 100%;
+  height: 100%;
+  background-color: var(--light);
+}
+
+a,
+p,
+td,
+th {
+  color: var(--dark);
+}
+
+button {
+  color: white;
+  background-color: var(--medium-plus);
+  padding: 4px 10px;
+}
+
+td,
+th {
+  padding: 0 10px;
+}
+
+tr:nth-child(2) {
+  background-color: var(--light-plus);
+  font-size: 24px;
+  font-weight: bold;
+
+  td {
+    padding: 10px;
+  }
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 0 20px;
+  font-size: 20px;
+}
+
+.delete-column {
+  display: none;
+
+  &.isEditing {
+    display: block;
+  }
+
+  button {
+    background: var(--medium-plus);
+    color: white;
+    font-weight: bold;
+  }
 }

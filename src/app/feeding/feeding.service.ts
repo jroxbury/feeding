@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, switchMap, timer } from 'rxjs';
 import { DateTimeService } from '../shared/date-time.service';
 import { StorageService } from '../shared/storage.service';
 import { DataService, ListData } from '../shared/data';
@@ -32,6 +32,10 @@ export class FeedingService {
   private feedingData = new BehaviorSubject<ListData<FeedItem> | null>(null);
   public feedingData$ = this.feedingData.asObservable();
 
+  private timer = new BehaviorSubject<number>(0);
+  private time = new ReplaySubject<number>(1);
+  public time$ = this.time.asObservable();
+
   private startTime!: Date;
   private stopTime!: Date;
   private currentSide!: Side;
@@ -50,6 +54,9 @@ export class FeedingService {
     this.storageService.initialize(this.localStorageKey, this.initialData);
     this.data = this.storageService.getData(this.localStorageKey);
     this.feedingData.next(this.data);
+    this.timer.pipe(switchMap((val) => timer(val, 1000))).subscribe((val) => {
+      this.time.next(val);
+    });
   }
 
   public resetData() {
@@ -94,5 +101,9 @@ export class FeedingService {
     }
     this.feedingData.next(this.data);
     this.storageService.setData(this.localStorageKey, this.data);
+  }
+
+  public startTimer(): void {
+    this.timer.next(0);
   }
 }

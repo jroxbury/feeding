@@ -49,37 +49,6 @@ import { DiaperListService } from './diaper-list.service';
         justify-content: flex-end;
         margin-top: 20px;
       }
-
-      table {
-        width: 100%;
-        text-align: left;
-        border-spacing: 0 20px;
-        font-size: 20px;
-      }
-
-      tr:nth-child(2) {
-        background-color: #f2f2f2;
-        font-size: 24px;
-        font-weight: bold;
-
-        td {
-          padding: 20px 0;
-        }
-      }
-
-      .delete-column {
-        display: none;
-
-        &.isEditing {
-          display: block;
-        }
-
-        button {
-          background: firebrick;
-          color: white;
-          font-weight: bold;
-        }
-      }
     `,
   ],
 })
