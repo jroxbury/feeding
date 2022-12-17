@@ -48,7 +48,7 @@ import { EditButtonComponent } from './edit-button.component';
         flex-direction: column;
         flex: 1;
         overflow-y: scroll;
-        max-height: 65vh;
+        max-height: 60vh;
       }
     `,
   ],
